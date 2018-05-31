@@ -1,0 +1,41 @@
+web:
+  restart: always
+  build: ./web
+  expose:
+    - "8000"
+  links:
+    - postgres:postgres
+    - redis
+  volumes:
+    - /usr/src/app/urlshortener/static
+  env_file: .env
+  command: /usr/local/bin/gunicorn -w 2 -b :8000 --limit-request-line 16384 urlshortener.app:app
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  volumes_from:
+    - web
+  links:
+    - web:web
+
+data:
+  restart: always
+  image: postgres:latest
+  volumes:
+    - /var/lib/postgresql
+  command: "true"
+
+postgres:
+  restart: always
+  build: .
+  dockerfile: dockerfile-postgres
+  volumes_from:
+    - data
+  ports:
+    - "5432:5432"
+
+redis:
+  image: redis

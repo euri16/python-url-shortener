@@ -1,0 +1,43 @@
+docker-machine start
+eval "$(docker-machine env default)"
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -a -q)
+docker-compose build [container] && docker-compose up -d
+
+------- Digital Ocean
+
+# deploying changes
+eval "$(docker-machine env urlshortener-docker-devel)"
+docker-machine create --driver digitalocean --digitalocean-access-token [TOKEN HERE] urlshortener-docker-devel
+docker-compose build && docker-compose up -d
+docker-machine stop urlshortener-docker-devel
+docker-machine rm urlshortener-docker-devel
+
+# update
+docker-compose build --no-cache postgres && docker-compose up -d
+
+# removing container
+docker-machine stop urlshortener-docker-devel
+docker-machine rm urlshortener-docker-devel
+
+# Connect to container
+docker ps
+docker exec -it [CONTAINER ID] sh (to run zsh, should be installed in the container)
+# su - postgres
+No directory, logging in with HOME=/
+$ psql
+
+RUN apt-get update
+RUN echo "Y" | apt-get upgrade
+RUN echo "Y" | apt-get install rsync
+RUN echo "Y" | apt-get install zsh
+
+--- pybabel ---
+
+pybabel extract -F babel.cfg -o messages.pot .
+
+//if new
+pybabel init -i messages.pot -d translations -l es
+
+pybabel update -i messages.pot -d translations
+
+pybabel compile -d translations
