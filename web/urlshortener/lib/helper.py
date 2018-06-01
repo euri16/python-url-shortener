@@ -1,6 +1,6 @@
 import re
 from flask import make_response
-import safejson
+from urlshortener.lib import safejson
 
 CONTENT_TYPE_JSON = "application/json"
 

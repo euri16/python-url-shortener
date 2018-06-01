@@ -2,5 +2,3 @@ FROM postgres:latest
 RUN mkdir -p '/var/chroot/pgsql/data/urlshortener'
 RUN chown postgres:postgres /var/chroot/pgsql/data/urlshortener
 ADD web/etc/db/urlshortener.sql /docker-entrypoint-initdb.d/
-ADD web/etc/db/initial_data.sql /docker-entrypoint-initdb.d/
-ADD web/etc/db/test_data.sql /docker-entrypoint-initdb.d/

@@ -1,5 +1,5 @@
-from . import api
+from . import frontend
 
 ACTIVE = (
-    ('/', api.api),
+    ('/', frontend.frontend),
 )

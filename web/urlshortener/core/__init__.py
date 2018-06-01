@@ -9,8 +9,7 @@ from logging.handlers import RotatingFileHandler
 import sys
 import traceback
 
-app = Flask(__name__, static_url_path='/../static',
-            template_folder='../templates')
+app = Flask(__name__, static_url_path='/../static', template_folder='../templates')
 app.root_path = os.path.join(os.path.dirname(__file__))
 app.config.from_pyfile("config/production.py", silent=True)
 app.db = db = SQLAlchemy(app)
