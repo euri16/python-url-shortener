@@ -1,24 +1,19 @@
-{% extends '__base.html' %}
-
-{% block htitle %}{{'Per.ez Url Shortener'}}.{% endblock %}
-
-{% block content %}
+{% extends '__base.html' %} {% block htitle %}{{'Per.ez Url Shortener'}}.{% endblock %} {% block content %}
 <div class="container">
-    <div class="row" style="margin-top:5em;">
+    <div class="row" style="margin-top:7em;">
         <div class="col-lg-9" style="margin:0 auto; text-align:center;">
             <h1 class="mt-5" style="color:white;">Per.ez URL Shortener</h1>
             <p style="color:white;">We are tired of those long URLs too...</p>
-            <div class="card">
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <input type="url" class="form-control" id="long_url" aria-describedby="urlHelp" placeholder="Enter your long URL">
-                            <small id="urlHelp" class="form-text text-left text-muted">You can enter any kind of URL</small>
+            <form>
+                <div class="form-group">
+                    <div class="input-group input-group-lg mb-3">
+                        <input type="url" class="form-control" id="long_url" aria-describedby="urlHelp" placeholder="Enter your long URL">
+                        <div class="input-group-append">
+                            <button class="btn btn-warning btn-lg" type="submit">Submit</button>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
