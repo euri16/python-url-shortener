@@ -18,6 +18,8 @@ You can find a detailed information for your platform in the [oficial docs](http
 
 Here are the commands you have to use in order to run it locally:
 
+There's a configuration file that contains all sensitive information related to the project, this was not commited, it is on a secure place and you need to ask for it before running it. 
+
 First you need to start the docker-machine:
 
 ```
