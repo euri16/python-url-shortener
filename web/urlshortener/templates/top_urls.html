@@ -1,0 +1,24 @@
+{% extends '__base.html' %} {% block htitle %}{{'Per.ez Url Shortener'}}.{% endblock %} {% block content %}
+<div class="container">
+    <h1 id="#top-title">Top 100 URLs</h1>
+    <div class="row table-title">
+        <div class="col-9">
+            URL
+        </div>
+        <div class="col">
+            Openings
+        </div>
+    </div>
+
+    {% for url in urls %}
+    <div class="row table-row">
+        <div class="col-9">
+            {{host}}{{ url.encoded_id() }}
+        </div>
+        <div class="col">
+            {{ url.openings }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

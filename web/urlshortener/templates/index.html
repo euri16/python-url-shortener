@@ -4,17 +4,55 @@
         <div class="col-lg-9" style="margin:0 auto; text-align:center;">
             <h1 class="mt-5" style="color:white;">Per.ez URL Shortener</h1>
             <p style="color:white;">We are tired of those long URLs too...</p>
-            <form>
+            <form method="POST" id="url_form" action="/">
                 <div class="form-group">
                     <div class="input-group input-group-lg mb-3">
-                        <input type="url" class="form-control" id="long_url" aria-describedby="urlHelp" placeholder="Enter your long URL">
+                        <span class="input-group-addon error-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+                        <input type="url" class="form-control" id="long_url" name="long_url" 
+                               aria-describedby="urlHelp" placeholder="Enter your long URL" autocomplete="off" required>
                         <div class="input-group-append">
                             <button class="btn btn-warning btn-lg" type="submit">Submit</button>
                         </div>
                     </div>
+                    {% if shortUrl is defined %}
+                    <small class="generated-url">Your url is {{ shortUrl }}</small>
+                    {% endif %}
                 </div>
             </form>
         </div>
     </div>
 </div>
+{% endblock %} 
+
+{% block scripts %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.form-group .input-group input[required]').on('keyup change', function () {
+            var $form = $(this).closest('form');
+
+            $('#url_form').bootstrapValidator({
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    long_url: {
+                        validators: {
+                            uri: {
+                                message: "Please enter a valid URL",
+                            },
+                            notEmpty: {
+                                message: 'Please enter a valid URL'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        $('.input-group input[required]').trigger('change');
+    });
+</script> 
+
 {% endblock %}
